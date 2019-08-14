@@ -11,16 +11,13 @@ You can install this library using `go get -u github.com/ChrisGora/semaphore`.
 The producer-consumer problem can be solved with the semaphores and Go's mutexes in the following way:
 
 ```go
-func producer(buffer *buffer, spaceAvailable, workAvailable semaphore.Semaphore, mutex *sync.Mutex, start, delta int) {
-	x := start
+func producer(buffer *buffer, spaceAvailable, workAvailable semaphore.Semaphore, mutex *sync.Mutex) {
 	for {
 		spaceAvailable.Wait()
 		mutex.Lock()
-		buffer.put(x)
+		buffer.put(1)
 		mutex.Unlock()
 		workAvailable.Post()
-		x = x + delta
-		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
 	}
 }
 
@@ -31,7 +28,6 @@ func consumer(buffer *buffer, spaceAvailable, workAvailable semaphore.Semaphore,
 		_ = buffer.get()
 		mutex.Unlock()
 		spaceAvailable.Post()
-		time.Sleep(time.Duration(rand.Intn(5000)) * time.Millisecond)
 	}
 }
 ```
