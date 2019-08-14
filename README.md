@@ -4,7 +4,7 @@ Semaphore provides a simple POSIX-style implementation of semaphores. Internally
 
 ## Install
 
-You can install this library using `go get -u github.com/ChrisGora/semaphores`.
+You can install this library using `go get -u github.com/ChrisGora/semaphore`.
 
 ## Example usage
 
