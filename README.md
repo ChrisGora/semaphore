@@ -6,7 +6,31 @@ Semaphore provides a simple POSIX-style implementation of semaphores. Internally
 
 You can install this library using `go get -u github.com/ChrisGora/semaphore`.
 
-## Example usage
+## Basic Usage
+### Creating a new semaphore
+`semaphore.Init(max, value)` takes a maximum value and initial value for the new semaphore.
+
+```go
+maxValue := 3
+initValue := 0
+
+sem := semaphore.Init(maxValue, initValue)
+```
+
+### Wait / Pend / P
+To decrease the value of the semaphore (also known as waiting, pending, etc.):
+```go
+sem.Wait()
+```
+
+### Post / Signal / V
+To increase the value of the semaphore (also known as posting, signalling, etc.):
+```go
+sem.Post()
+```
+
+## Example Usage
+### Producer-Consumer
 
 The producer-consumer problem can be solved with the semaphores and Go's mutexes in the following way:
 
